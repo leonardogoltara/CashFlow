@@ -1,9 +1,9 @@
 ﻿namespace CashFlow.Domain.Models
 {
-    public class CashOut : EntityBase
+    public class CashOutModel : ModelBase
     {
-        public CashOut() : base() { }
-        public CashOut(decimal amount, DateTime dateTime) : this()
+        public CashOutModel() : base() { }
+        public CashOutModel(decimal amount, DateTime dateTime) : this()
         {
             Amount = amount;
             DateTime = dateTime;

@@ -6,12 +6,12 @@ using CashFlow.Domain.Repository;
 
 namespace CashFlow.Domain.Services
 {
-    public class CashInServices
+    public class CashInService
     {
         private ICashInRepository _cashInRepository;
         private IMapper _mapper;
 
-        public CashInServices(ICashInRepository cashInRepository, IMapper mapper)
+        public CashInService(ICashInRepository cashInRepository, IMapper mapper)
         {
             _cashInRepository = cashInRepository;
             _mapper = mapper;
@@ -35,7 +35,7 @@ namespace CashFlow.Domain.Services
 
             try
             {
-                var cashIn = new CashIn(amount, dateTime);
+                var cashIn = new CashInModel(amount, dateTime);
                 await _cashInRepository.Save(cashIn);
                 cashInResult = _mapper.Map<CashInResult>(cashIn);
 

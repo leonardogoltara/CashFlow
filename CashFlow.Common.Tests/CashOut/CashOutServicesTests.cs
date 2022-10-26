@@ -23,11 +23,11 @@ namespace CashFlow.Common.Tests.CashOut
             decimal amount = 50.98m;
             DateTime dateTime = DateTime.Now;
 
-            _mockCashOutRepository.Setup(r => r.Save(It.IsAny<Domain.Models.CashOut>()))
+            _mockCashOutRepository.Setup(r => r.Save(It.IsAny<Domain.Models.CashOutModel>()))
                 .ReturnsAsync(true);
 
             ICashOutRepository cashOutRepository = _mockCashOutRepository.Object;
-            var service = new CashOutServices(cashOutRepository, Mapper.GetMaps());
+            var service = new CashOutService(cashOutRepository, Mapper.GetMaps());
             var result = service.Save(amount, dateTime).GetAwaiter().GetResult();
 
             Assert.IsNotNull(result);
@@ -35,7 +35,7 @@ namespace CashFlow.Common.Tests.CashOut
             Assert.AreEqual(amount, result.Amount);
             Assert.AreEqual(dateTime, result.DateTime);
             Assert.IsTrue(string.IsNullOrWhiteSpace(result.ErrorMessage));
-            _mockCashOutRepository.Verify(c => c.Save(It.IsAny<Domain.Models.CashOut>()), Times.Once);
+            _mockCashOutRepository.Verify(c => c.Save(It.IsAny<Domain.Models.CashOutModel>()), Times.Once);
             _mockCashOutRepository.Verify(c => c.Get(It.IsAny<int>()), Times.Never);
         }
 
@@ -63,7 +63,7 @@ namespace CashFlow.Common.Tests.CashOut
             decimal amount = 50.98m;
             DateTime dateTime = DateTime.Now;
 
-            _mockCashOutRepository.Setup(r => r.Save(It.IsAny<Domain.Models.CashOut>()))
+            _mockCashOutRepository.Setup(r => r.Save(It.IsAny<Domain.Models.CashOutModel>()))
                 .Callback(() =>
                 {
                     throw new Exception("Exceção de Teste", new Exception("Exceção Interna de Teste"));
@@ -71,7 +71,7 @@ namespace CashFlow.Common.Tests.CashOut
                 .ReturnsAsync(true);
 
             ICashOutRepository cashOutRepository = _mockCashOutRepository.Object;
-            var service = new CashOutServices(cashOutRepository, Mapper.GetMaps());
+            var service = new CashOutService(cashOutRepository, Mapper.GetMaps());
             var result = service.Save(amount, dateTime).GetAwaiter().GetResult();
 
             Assert.IsNotNull(result);
@@ -79,7 +79,7 @@ namespace CashFlow.Common.Tests.CashOut
             Assert.AreEqual(0, result.Amount);
             Assert.AreEqual(DateTime.MinValue, result.DateTime);
             Assert.IsFalse(string.IsNullOrWhiteSpace(result.ErrorMessage));
-            _mockCashOutRepository.Verify(c => c.Save(It.IsAny<Domain.Models.CashOut>()), Times.Once);
+            _mockCashOutRepository.Verify(c => c.Save(It.IsAny<Domain.Models.CashOutModel>()), Times.Once);
             _mockCashOutRepository.Verify(c => c.Get(It.IsAny<int>()), Times.Never);
         }
 

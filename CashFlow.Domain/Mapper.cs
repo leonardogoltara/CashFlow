@@ -10,8 +10,8 @@ namespace CashFlow.Domain
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<CashIn, CashInResult>();
-                cfg.CreateMap<CashOut, CashOutResult>();
+                cfg.CreateMap<CashInModel, CashInResult>();
+                cfg.CreateMap<CashOutModel, CashOutResult>();
             });
 
             IMapper mapper = config.CreateMapper();

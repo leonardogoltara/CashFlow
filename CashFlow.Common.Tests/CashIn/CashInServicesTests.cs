@@ -21,11 +21,11 @@ namespace CashFlow.Common.Tests.CashIn
             decimal amount = 13.97m;
             DateTime dateTime = DateTime.Now.AddMinutes(-5);
 
-            _mockCashInRepository.Setup(r => r.Save(It.IsAny<Domain.Models.CashIn>()))
+            _mockCashInRepository.Setup(r => r.Save(It.IsAny<Domain.Models.CashInModel>()))
                 .ReturnsAsync(true);
 
             ICashInRepository cashInRepository = _mockCashInRepository.Object;
-            var service = new CashInServices(cashInRepository, Mapper.GetMaps());
+            var service = new CashInService(cashInRepository, Mapper.GetMaps());
             var result = service.Save(amount, dateTime).GetAwaiter().GetResult();
 
             Assert.IsNotNull(result);
@@ -33,7 +33,7 @@ namespace CashFlow.Common.Tests.CashIn
             Assert.AreEqual(amount, result.Amount);
             Assert.AreEqual(dateTime, result.DateTime);
             Assert.IsTrue(string.IsNullOrWhiteSpace(result.ErrorMessage));
-            _mockCashInRepository.Verify(c => c.Save(It.IsAny<Domain.Models.CashIn>()), Times.Once);
+            _mockCashInRepository.Verify(c => c.Save(It.IsAny<Domain.Models.CashInModel>()), Times.Once);
             _mockCashInRepository.Verify(c => c.Get(It.IsAny<int>()), Times.Never);
         }
 

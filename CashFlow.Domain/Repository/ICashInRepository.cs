@@ -2,7 +2,7 @@
 
 namespace CashFlow.Domain.Repository
 {
-    public interface ICashInRepository : IRepository<CashIn>
+    public interface ICashInRepository : IRepository<CashInModel>
     {
 
     }

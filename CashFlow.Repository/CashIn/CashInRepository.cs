@@ -4,12 +4,12 @@ namespace CashFlow.Repository.CashIn
 {
     public class CashInRepository : ICashInRepository
     {
-        public Task<Domain.Models.CashIn> Get(int id)
+        public Task<Domain.Models.CashInModel> Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> Save(Domain.Models.CashIn entity)
+        public Task<bool> Save(Domain.Models.CashInModel entity)
         {
             throw new NotImplementedException();
         }

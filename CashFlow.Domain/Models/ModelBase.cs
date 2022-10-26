@@ -1,13 +1,13 @@
 ﻿namespace CashFlow.Domain.Models
 {
-    public abstract class EntityBase
+    public abstract class ModelBase
     {
         public int Id { get; }
         public DateTime UpdatedDate { get; private set; }
         public DateTime? CancelationDate { get; private set; }
         public bool IsActive { get; private set; }
 
-        public EntityBase()
+        public ModelBase()
         {
             IsActive = true;
             UpdatedDate = DateTime.Now;
