@@ -21,7 +21,7 @@ namespace CashFlow.Domain.Services
         {
             CashOutResult cashOutResult = new CashOutResult();
 
-            if (amount < 0)
+            if (amount <= 0)
             {
                 cashOutResult.SetErrorMessage("O valor da saída é obrigatório.");
                 return cashOutResult;

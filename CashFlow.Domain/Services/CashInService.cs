@@ -21,7 +21,7 @@ namespace CashFlow.Domain.Services
         {
             CashInResult cashInResult = new CashInResult();
 
-            if (amount < 0)
+            if (amount <= 0)
             {
                 cashInResult.SetErrorMessage("O valor da entrada é obrigatório.");
                 return cashInResult;

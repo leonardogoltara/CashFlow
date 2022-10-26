@@ -14,7 +14,15 @@ namespace CashFlow.WorkService
             while (!stoppingToken.IsCancellationRequested)
             {
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                await Task.Delay(1000, stoppingToken);
+
+                // Lê a mensagem da fila
+
+                // Se houver
+                // ConsolidationService.ConsolidateDay
+                // ConsolidationService.ConsolidateMonth
+                // ConsolidationService.ConsolidateYear
+
+                await Task.Delay(5000, stoppingToken);
             }
         }
     }
