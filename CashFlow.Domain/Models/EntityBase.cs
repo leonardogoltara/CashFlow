@@ -1,11 +1,11 @@
-﻿namespace CashFlow.Common.Models
+﻿namespace CashFlow.Domain.Models
 {
     public abstract class EntityBase
     {
         public int Id { get; }
-        public DateTime UpdatedDate { get; protected set; }
-        public DateTime? CancelationDate { get; protected set; }
-        public bool IsActive { get; protected set; }
+        public DateTime UpdatedDate { get; private set; }
+        public DateTime? CancelationDate { get; private set; }
+        public bool IsActive { get; private set; }
 
         public EntityBase()
         {
@@ -14,7 +14,7 @@
             CancelationDate = null;
         }
 
-        protected void Cancel()
+        public void Cancel()
         {
             CancelationDate = DateTime.Now;
             UpdatedDate = DateTime.Now;

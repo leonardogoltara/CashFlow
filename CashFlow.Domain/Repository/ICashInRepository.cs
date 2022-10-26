@@ -1,6 +1,6 @@
-﻿using CashFlow.Common.Models;
+﻿using CashFlow.Domain.Models;
 
-namespace CashFlow.Common.Repository
+namespace CashFlow.Domain.Repository
 {
     public interface ICashInRepository : IRepository<CashIn>
     {
