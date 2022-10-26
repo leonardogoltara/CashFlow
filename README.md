@@ -5,5 +5,5 @@
 - Repository
 - Criar banco
 - RabbitMQ
--- SendMessage no Service
--- Processa no WorkService
+  - SendMessage no Service
+  - Processa no WorkService
