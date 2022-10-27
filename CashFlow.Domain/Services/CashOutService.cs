@@ -11,10 +11,10 @@ namespace CashFlow.Domain.Services
         private ICashOutRepository _cashOutRepository;
         private IMapper _mapper;
 
-        public CashOutService(ICashOutRepository cashOutRepository, IMapper mapper)
+        public CashOutService(ICashOutRepository cashOutRepository)
         {
             _cashOutRepository = cashOutRepository;
-            _mapper = mapper;
+            _mapper = Mapper.GetMaps();
         }
 
         public async Task<CashOutResult> Save(decimal amount, DateTime date)

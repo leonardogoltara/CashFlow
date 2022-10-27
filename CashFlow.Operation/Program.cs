@@ -1,9 +1,18 @@
+using AutoMapper;
+using CashFlow.Domain.DTOs;
+using CashFlow.Domain.Repository;
+using CashFlow.Domain.Services;
+using CashFlow.Operation;
 using CashFlow.Persistence;
+using CashFlow.Persistence.Repository;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
+
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
-var connectionString = builder.Configuration.GetValue<string>("ConnectionString");
+var connectionString = builder.Configuration.GetConnectionString("cashflowdb");
 
 builder.Services.AddDbContext<CashFlowDataContext>(opt =>
 {
@@ -13,7 +22,35 @@ builder.Services.AddDbContext<CashFlowDataContext>(opt =>
         opt.UseNpgsql(connectionString);
 }, ServiceLifetime.Singleton);
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(opt =>
+{
+    opt.EnableAnnotations();
+    opt.TagActionsBy(d => new List<string> { d.ActionDescriptor.DisplayName });
+});
 
-app.MapGet("/", () => "Hello World!");
+builder.Services.AddTransient<ICashInRepository, CashInRepository>();
+builder.Services.AddTransient<ICashOutRepository, CashOutRepository>();
+builder.Services.AddTransient<CashInService>();
+builder.Services.AddTransient<CashOutService>();
+
+var app = builder.Build();
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
+app.MapGet("/", () => "Welcome to CashFlow Operations.");
+
+app.MapPost("CashIn", async (CashInService service, [FromBody] CashInDTO dto) =>
+{
+    var result = await service.Save(dto.Amount, dto.Date);
+    return AppResults.Ok(result);
+});
+
+app.MapPost("CashOut", async (CashOutService service, [FromBody] CashOutDTO dto) =>
+{
+    var result = await service.Save(dto.Amount, dto.Date);
+    return AppResults.Ok(result);
+});
 
 app.Run();

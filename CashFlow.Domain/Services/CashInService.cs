@@ -11,10 +11,10 @@ namespace CashFlow.Domain.Services
         private ICashInRepository _cashInRepository;
         private IMapper _mapper;
 
-        public CashInService(ICashInRepository cashInRepository, IMapper mapper)
+        public CashInService(ICashInRepository cashInRepository)
         {
             _cashInRepository = cashInRepository;
-            _mapper = mapper;
+            _mapper = Mapper.GetMaps();
         }
 
         public async Task<CashInResult> Save(decimal amount, DateTime date)

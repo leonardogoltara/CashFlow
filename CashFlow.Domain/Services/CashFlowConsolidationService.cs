@@ -16,14 +16,14 @@ namespace CashFlow.Domain.Services
 
         public CashFlowConsolidationService(ICashInRepository cashInRepository, ICashOutRepository cashOutRepository,
             IConsolidateDayRepository consolidateDayRepository, IConsolidateMonthRepository consolidateMonthRepository,
-            IConsolidateYearRepository consolidateYearRepository, IMapper mapper)
+            IConsolidateYearRepository consolidateYearRepository)
         {
             _cashInRepository = cashInRepository;
             _cashOutRepository = cashOutRepository;
             _consolidateDayRepository = consolidateDayRepository;
             _consolidateMonthRepository = consolidateMonthRepository;
             _consolidateYearRepository = consolidateYearRepository;
-            _mapper = mapper;
+            _mapper = Mapper.GetMaps();
         }
 
         public async Task<bool> ConsolidateDay(DateTime date)

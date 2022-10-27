@@ -99,7 +99,7 @@ namespace CashFlow.Domain.Tests.CashFlowConsolidation
         public void ConsolidateDay_when_success()
         {
             var service = new CashFlowConsolidationService(_cashInRepository.Object, _cashOutRepository.Object, _consolidateDayRepository.Object,
-                _consolidateMonthRepository.Object, _consolidateYearRepository.Object, Mapper.GetMaps());
+                _consolidateMonthRepository.Object, _consolidateYearRepository.Object);
 
             var result = service.ConsolidateDay(new DateTime(2022, 10, 26)).GetAwaiter().GetResult();
 
@@ -114,7 +114,7 @@ namespace CashFlow.Domain.Tests.CashFlowConsolidation
         public void ConsolidateMonth_when_success()
         {
             var service = new CashFlowConsolidationService(_cashInRepository.Object, _cashOutRepository.Object, _consolidateDayRepository.Object,
-                _consolidateMonthRepository.Object, _consolidateYearRepository.Object, Mapper.GetMaps());
+                _consolidateMonthRepository.Object, _consolidateYearRepository.Object);
 
             _consolidateDayModels.Add(new ConsolidateDayModel(new DateTime(2022, 9, 1), 50, 45));
             _consolidateDayModels.Add(new ConsolidateDayModel(new DateTime(2022, 9, 15), 80, 40));
@@ -131,7 +131,7 @@ namespace CashFlow.Domain.Tests.CashFlowConsolidation
         public void ConsolidateYear_when_success()
         {
             var service = new CashFlowConsolidationService(_cashInRepository.Object, _cashOutRepository.Object, _consolidateDayRepository.Object,
-                _consolidateMonthRepository.Object, _consolidateYearRepository.Object, Mapper.GetMaps());
+                _consolidateMonthRepository.Object, _consolidateYearRepository.Object);
 
             _consolidateMonthModels.Add(new ConsolidateMonthModel(new DateTime(2022, 8, 5), 50, 45));
             _consolidateMonthModels.Add(new ConsolidateMonthModel(new DateTime(2022, 9, 5), 80, 40));

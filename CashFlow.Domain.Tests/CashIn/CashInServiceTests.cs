@@ -25,7 +25,7 @@ namespace CashFlow.Domain.Tests.CashIn
                 .ReturnsAsync(true);
 
             ICashInRepository cashInRepository = _mockCashInRepository.Object;
-            var service = new CashInService(cashInRepository, Mapper.GetMaps());
+            var service = new CashInService(cashInRepository);
             var result = service.Save(amount, dateTime).GetAwaiter().GetResult();
 
             Assert.IsNotNull(result);
@@ -48,7 +48,7 @@ namespace CashFlow.Domain.Tests.CashIn
                 .ReturnsAsync(true);
 
             ICashInRepository cashInRepository = _mockCashInRepository.Object;
-            var service = new CashInService(cashInRepository, Mapper.GetMaps());
+            var service = new CashInService(cashInRepository);
             var result = service.Save(amount, dateTime).GetAwaiter().GetResult();
 
             Assert.IsNotNull(result);
@@ -71,7 +71,7 @@ namespace CashFlow.Domain.Tests.CashIn
                 .ReturnsAsync(true);
 
             ICashInRepository cashInRepository = _mockCashInRepository.Object;
-            var service = new CashInService(cashInRepository, Mapper.GetMaps());
+            var service = new CashInService(cashInRepository);
             var result = service.Save(amount, dateTime).GetAwaiter().GetResult();
 
             Assert.IsNotNull(result);
@@ -94,7 +94,7 @@ namespace CashFlow.Domain.Tests.CashIn
                 .ReturnsAsync(true);
 
             ICashInRepository cashInRepository = _mockCashInRepository.Object;
-            var service = new CashInService(cashInRepository, Mapper.GetMaps());
+            var service = new CashInService(cashInRepository);
             var result = service.Save(amount, dateTime).GetAwaiter().GetResult();
 
             Assert.IsNotNull(result);
@@ -121,7 +121,7 @@ namespace CashFlow.Domain.Tests.CashIn
                 .ReturnsAsync(true);
 
             ICashInRepository cashInRepository = _mockCashInRepository.Object;
-            var service = new CashInService(cashInRepository, Mapper.GetMaps());
+            var service = new CashInService(cashInRepository);
             var result = service.Save(amount, dateTime).GetAwaiter().GetResult();
 
             Assert.IsNotNull(result);
@@ -145,7 +145,7 @@ namespace CashFlow.Domain.Tests.CashIn
                 .ReturnsAsync(cashIn);
 
             ICashInRepository cashInRepository = _mockCashInRepository.Object;
-            var service = new CashInService(cashInRepository, Mapper.GetMaps());
+            var service = new CashInService(cashInRepository);
             var result = service.Cancel(cashIn.Id).GetAwaiter().GetResult();
 
             Assert.IsNotNull(result);
@@ -168,7 +168,7 @@ namespace CashFlow.Domain.Tests.CashIn
                 .ReturnsAsync(cashIn);
 
             ICashInRepository cashInRepository = _mockCashInRepository.Object;
-            var service = new CashInService(cashInRepository, Mapper.GetMaps());
+            var service = new CashInService(cashInRepository);
             var result = service.Cancel(cashInId).GetAwaiter().GetResult();
 
             Assert.IsNotNull(result);
@@ -198,7 +198,7 @@ namespace CashFlow.Domain.Tests.CashIn
                 .ReturnsAsync(cashIn);
 
             ICashInRepository cashInRepository = _mockCashInRepository.Object;
-            var service = new CashInService(cashInRepository, Mapper.GetMaps());
+            var service = new CashInService(cashInRepository);
             var result = service.Cancel(cashInId).GetAwaiter().GetResult();
 
             Assert.IsNotNull(result);
@@ -228,7 +228,7 @@ namespace CashFlow.Domain.Tests.CashIn
                 .ReturnsAsync(cashIn);
 
             ICashInRepository cashInRepository = _mockCashInRepository.Object;
-            var service = new CashInService(cashInRepository, Mapper.GetMaps());
+            var service = new CashInService(cashInRepository);
             var result = service.Cancel(cashInId).GetAwaiter().GetResult();
 
             Assert.IsNotNull(result);
