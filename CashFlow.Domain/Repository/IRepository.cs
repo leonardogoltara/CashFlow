@@ -6,5 +6,6 @@ namespace CashFlow.Domain.Repository
     {
         public Task<bool> Save(T entity);
         public Task<T> Get(int id);
+        public Task<decimal> SumActiveAmountByDay(DateTime dateTime, bool isActive);
     }
 }

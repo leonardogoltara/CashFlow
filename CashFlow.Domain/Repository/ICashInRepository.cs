@@ -4,6 +4,5 @@ namespace CashFlow.Domain.Repository
 {
     public interface ICashInRepository : IRepository<CashInModel>
     {
-
     }
 }

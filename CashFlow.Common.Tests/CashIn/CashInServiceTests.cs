@@ -8,7 +8,7 @@ namespace CashFlow.Common.Tests.CashIn
     [TestClass]
     public class CashInServiceTests
     {
-        Mock<ICashInRepository> _mockCashInRepository;
+        private Mock<ICashInRepository> _mockCashInRepository;
 
         public CashInServiceTests()
         {

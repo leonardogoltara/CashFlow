@@ -8,7 +8,7 @@ namespace CashFlow.Common.Tests.CashOut
     [TestClass]
     public class CashOutServiceTests
     {
-        Mock<ICashOutRepository> _mockCashOutRepository;
+        private Mock<ICashOutRepository> _mockCashOutRepository;
 
         public CashOutServiceTests()
         {
