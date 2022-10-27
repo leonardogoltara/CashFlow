@@ -36,8 +36,11 @@ namespace CashFlow.Persistence.Repository
 
         public async Task<ConsolidateDayResult> SumAmountByMonth(DateTime date)
         {
+            int year = date.Year;
+            int month = date.Month;
+
             var result = await _context.ConsolidateDays
-                 .Where(x => x.Day == date)
+                 .Where(x => x.Day.Month == month && x.Day.Year == year)
                  .GroupBy(x => x.Day)
                  .Select(x => new ConsolidateDayResult()
                  {

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CashFlow.Common.ExtensionsMethods;
 using CashFlow.Domain.Models;
 using CashFlow.Domain.Repository;
 using CashFlow.Domain.Results;
@@ -28,48 +29,72 @@ namespace CashFlow.Domain.Services
 
         public async Task<bool> ConsolidateDay(DateTime date)
         {
-            var cashInAmount = await _cashInRepository.SumActiveAmountByDay(date, true);
-            var cashOutAmount = await _cashOutRepository.SumActiveAmountByDay(date, true);
-
-            ConsolidateDayModel consolidateDayModel = await _consolidateDayRepository.Get(date);
-            if (consolidateDayModel == null)
+            try
             {
-                consolidateDayModel = new ConsolidateDayModel(date, cashInAmount, cashOutAmount);
+                var cashInAmount = await _cashInRepository.SumActiveAmountByDay(date, true);
+                var cashOutAmount = await _cashOutRepository.SumActiveAmountByDay(date, true);
+
+                ConsolidateDayModel consolidateDayModel = await _consolidateDayRepository.Get(date);
+                if (consolidateDayModel == null)
+                {
+                    consolidateDayModel = new ConsolidateDayModel(date, cashInAmount, cashOutAmount);
+                }
+                else
+                {
+                    consolidateDayModel.Update(cashInAmount, cashOutAmount);
+                }
+
+                var result = await _consolidateDayRepository.Save(consolidateDayModel);
+
+                var month = new DateTime(date.Year, date.Month, 1);
+                var monthResult = await ConsolidateMonth(month);
+                result = (result && monthResult);
+
+                return result;
             }
-            else
+            catch (Exception ex)
             {
-                consolidateDayModel.Update(cashInAmount, cashOutAmount);
+                Console.WriteLine(ex.GetCompleteMessage());
+
+                return false;
             }
-
-            var result = await _consolidateDayRepository.Save(consolidateDayModel);
-
-            var month = new DateTime(date.Year, date.Month, 1);
-            var monthResult = await ConsolidateMonth(month);
-            result = (result && monthResult);
-
-            return result;
         }
 
         public async Task<bool> ConsolidateMonth(DateTime month)
         {
-            ConsolidateDayResult consolidateDayResult = await _consolidateDayRepository.SumAmountByMonth(month);
-            ConsolidateMonthModel consolidateMonthModel = await _consolidateMonthRepository.Get(month);
-
-            if (consolidateMonthModel == null)
+            try
             {
-                consolidateMonthModel = new ConsolidateMonthModel(month, consolidateDayResult.CashInAmout, consolidateDayResult.CashOutAmout);
+                var result = true;
+                ConsolidateDayResult consolidateDayResult = await _consolidateDayRepository.SumAmountByMonth(month);
+
+                if (consolidateDayResult != null)
+                {
+
+                    ConsolidateMonthModel consolidateMonthModel = await _consolidateMonthRepository.Get(month);
+
+                    if (consolidateMonthModel == null)
+                    {
+                        consolidateMonthModel = new ConsolidateMonthModel(month, consolidateDayResult.CashInAmout, consolidateDayResult.CashOutAmout);
+                    }
+                    else
+                    {
+                        consolidateMonthModel.Update(consolidateDayResult.CashInAmout, consolidateDayResult.CashOutAmout);
+                    }
+
+                    result = await _consolidateMonthRepository.Save(consolidateMonthModel);
+                }
+
+                var yearResult = await ConsolidateYear(month.Year);
+                result = (result && yearResult);
+
+                return result;
             }
-            else
+            catch (Exception ex)
             {
-                consolidateMonthModel.Update(consolidateDayResult.CashInAmout, consolidateDayResult.CashOutAmout);
+                Console.WriteLine(ex.GetCompleteMessage());
+
+                return false;
             }
-
-            var result = await _consolidateMonthRepository.Save(consolidateMonthModel);
-
-            var yearResult = await ConsolidateYear(month.Year);
-            result = (result && yearResult);
-
-            return result;
         }
 
         public async Task<bool> ConsolidateYear(int year)
@@ -77,6 +102,9 @@ namespace CashFlow.Domain.Services
             try
             {
                 ConsolidateMonthResult consolidateMonthResult = await _consolidateMonthRepository.SumAmountByYear(year);
+                if (consolidateMonthResult == null)
+                    return true;
+
                 ConsolidateYearModel consolidateYearModel = await _consolidateYearRepository.Get(year);
 
                 if (consolidateYearModel == null)
@@ -92,8 +120,10 @@ namespace CashFlow.Domain.Services
 
                 return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.GetCompleteMessage());
+
                 return false;
             }
         }

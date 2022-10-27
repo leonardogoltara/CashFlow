@@ -36,7 +36,7 @@ namespace CashFlow.Persistence.Repository
         public Task<decimal> SumActiveAmountByDay(DateTime date, bool isActive)
         {
             var amout = _context.CashOuts
-                .Where(x => x.Date == date && x.IsActive == isActive)
+                .Where(x => x.Date.Date == date && x.IsActive == isActive)
                 .Select(x => x.Amount)
                 .SumAsync();
 
