@@ -2,7 +2,7 @@
 {
     public abstract class ModelBase
     {
-        public int Id { get; private set; }
+        public long Id { get; private set; }
         public DateTime UpdatedDate { get; private set; }
         public DateTime? CancelationDate { get; private set; }
         public bool IsActive { get; private set; }
@@ -21,7 +21,7 @@
             IsActive = false;
         }
 
-        protected void SetId(int id)
+        protected void SetId(long id)
         {
             Id = id;
         }

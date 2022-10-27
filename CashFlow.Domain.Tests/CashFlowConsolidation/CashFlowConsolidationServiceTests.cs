@@ -5,7 +5,7 @@ using CashFlow.Domain.Results;
 using CashFlow.Domain.Services;
 using Moq;
 
-namespace CashFlow.Common.Tests.CashFlowConsolidation
+namespace CashFlow.Domain.Tests.CashFlowConsolidation
 {
     [TestClass]
     public class CashFlowConsolidationServiceTests
@@ -48,10 +48,10 @@ namespace CashFlow.Common.Tests.CashFlowConsolidation
             _cashOutModels.Add(new CashOutModel(1, 18.30m, new DateTime(2022, 10, 27)));
 
             _cashInRepository.Setup(c => c.SumActiveAmountByDay(It.IsAny<DateTime>(), It.IsAny<bool>()))
-                .ReturnsAsync((DateTime date, bool isActive) => _cashInModels.Where(x => x.IsActive == isActive && x.DateTime.Date == date.Date).Select(c => c.Amount).Sum());
+                .ReturnsAsync((DateTime date, bool isActive) => _cashInModels.Where(x => x.IsActive == isActive && x.Date.Date == date.Date).Select(c => c.Amount).Sum());
 
             _cashOutRepository.Setup(c => c.SumActiveAmountByDay(It.IsAny<DateTime>(), It.IsAny<bool>()))
-                .ReturnsAsync((DateTime date, bool isActive) => _cashOutModels.Where(x => x.IsActive == isActive && x.DateTime.Date == date.Date).Select(c => c.Amount).Sum());
+                .ReturnsAsync((DateTime date, bool isActive) => _cashOutModels.Where(x => x.IsActive == isActive && x.Date.Date == date.Date).Select(c => c.Amount).Sum());
 
             _consolidateDayModels = new List<ConsolidateDayModel>();
             _consolidateDayRepository.Setup(c => c.Save(It.IsAny<ConsolidateDayModel>()))

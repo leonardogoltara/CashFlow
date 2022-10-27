@@ -17,7 +17,7 @@ namespace CashFlow.Domain.Services
             _mapper = mapper;
         }
 
-        public async Task<CashInResult> Save(decimal amount, DateTime dateTime)
+        public async Task<CashInResult> Save(decimal amount, DateTime date)
         {
             CashInResult cashInResult = new CashInResult();
 
@@ -27,7 +27,7 @@ namespace CashFlow.Domain.Services
                 return cashInResult;
             }
 
-            if (dateTime <= DateTime.MinValue || dateTime >= DateTime.MaxValue)
+            if (date <= DateTime.MinValue || date >= DateTime.MaxValue)
             {
                 cashInResult.SetErrorMessage("A data da entrada está inválida.");
                 return cashInResult;
@@ -35,7 +35,7 @@ namespace CashFlow.Domain.Services
 
             try
             {
-                var cashIn = new CashInModel(amount, dateTime);
+                var cashIn = new CashInModel(amount, date);
                 await _cashInRepository.Save(cashIn);
                 cashInResult = _mapper.Map<CashInResult>(cashIn);
 
@@ -50,7 +50,7 @@ namespace CashFlow.Domain.Services
             }
         }
 
-        public async Task<CashInResult> Cancel(int id)
+        public async Task<CashInResult> Cancel(long id)
         {
             CashInResult cashInCanceledResult = new CashInResult();
 

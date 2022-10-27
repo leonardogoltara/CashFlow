@@ -3,18 +3,18 @@
     public class CashInModel : ModelBase
     {
         public CashInModel() : base() { }
-        public CashInModel(decimal amount, DateTime dateTime) : this()
+        public CashInModel(decimal amount, DateTime date) : this()
         {
             Amount = amount;
-            DateTime = dateTime;
+            Date = date;
         }
 
-        public CashInModel(int id, decimal amount, DateTime dateTime) : this(amount, dateTime)
+        public CashInModel(long id, decimal amount, DateTime date) : this(amount, date)
         {
             SetId(id);
         }
 
         public decimal Amount { get; private set; }
-        public DateTime DateTime { get; private set; }
+        public DateTime Date { get; private set; }
     }
 }

@@ -2,7 +2,6 @@
 using CashFlow.Domain.Models;
 using CashFlow.Domain.Repository;
 using CashFlow.Domain.Results;
-using System;
 
 namespace CashFlow.Domain.Services
 {
@@ -27,15 +26,15 @@ namespace CashFlow.Domain.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> ConsolidateDay(DateTime dateTime)
+        public async Task<bool> ConsolidateDay(DateTime date)
         {
-            var cashInAmount = await _cashInRepository.SumActiveAmountByDay(dateTime, true);
-            var cashOutAmount = await _cashOutRepository.SumActiveAmountByDay(dateTime, true);
+            var cashInAmount = await _cashInRepository.SumActiveAmountByDay(date, true);
+            var cashOutAmount = await _cashOutRepository.SumActiveAmountByDay(date, true);
 
-            ConsolidateDayModel consolidateDayModel = await _consolidateDayRepository.Get(dateTime);
+            ConsolidateDayModel consolidateDayModel = await _consolidateDayRepository.Get(date);
             if (consolidateDayModel == null)
             {
-                consolidateDayModel = new ConsolidateDayModel(dateTime, cashInAmount, cashOutAmount);
+                consolidateDayModel = new ConsolidateDayModel(date, cashInAmount, cashOutAmount);
             }
             else
             {
@@ -44,7 +43,7 @@ namespace CashFlow.Domain.Services
 
             var result = await _consolidateDayRepository.Save(consolidateDayModel);
 
-            var month = new DateTime(dateTime.Year, dateTime.Month, 1);
+            var month = new DateTime(date.Year, date.Month, 1);
             var monthResult = await ConsolidateMonth(month);
             result = (result && monthResult);
 

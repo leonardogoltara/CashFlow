@@ -17,7 +17,7 @@ namespace CashFlow.Domain.Services
             _mapper = mapper;
         }
 
-        public async Task<CashOutResult> Save(decimal amount, DateTime dateTime)
+        public async Task<CashOutResult> Save(decimal amount, DateTime date)
         {
             CashOutResult cashOutResult = new CashOutResult();
 
@@ -27,7 +27,7 @@ namespace CashFlow.Domain.Services
                 return cashOutResult;
             }
 
-            if (dateTime <= DateTime.MinValue || dateTime >= DateTime.MaxValue)
+            if (date <= DateTime.MinValue || date >= DateTime.MaxValue)
             {
                 cashOutResult.SetErrorMessage("A data da saída está inválida.");
                 return cashOutResult;
@@ -35,7 +35,7 @@ namespace CashFlow.Domain.Services
 
             try
             {
-                var cashOut = new CashOutModel(amount, dateTime);
+                var cashOut = new CashOutModel(amount, date);
                 await _cashOutRepository.Save(cashOut);
                 cashOutResult = _mapper.Map<CashOutResult>(cashOut);
 
@@ -51,7 +51,7 @@ namespace CashFlow.Domain.Services
 
         }
 
-        public async Task<CashOutResult> Cancel(int id)
+        public async Task<CashOutResult> Cancel(long id)
         {
             CashOutResult cashOutCanceledResult = new CashOutResult();
            

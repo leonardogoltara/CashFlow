@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CashFlow.Domain.Models
+﻿namespace CashFlow.Domain.Models
 {
     public class ConsolidateYearModel : ConsolidateBase
     {

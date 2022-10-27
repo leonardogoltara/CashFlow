@@ -15,7 +15,7 @@
 
         public decimal CashInAmout { get; private set; }
         public decimal CashOutAmout { get; private set; }
-        public int Id { get; private set; }
+        public long Id { get; private set; }
         public DateTime UpdatedDate { get; private set; }
 
         protected void SetId(int id)

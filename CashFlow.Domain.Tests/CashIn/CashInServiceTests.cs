@@ -3,7 +3,7 @@ using CashFlow.Domain.Repository;
 using CashFlow.Domain.Services;
 using Moq;
 
-namespace CashFlow.Common.Tests.CashIn
+namespace CashFlow.Domain.Tests.CashIn
 {
     [TestClass]
     public class CashInServiceTests
@@ -31,11 +31,11 @@ namespace CashFlow.Common.Tests.CashIn
             Assert.IsNotNull(result);
             Assert.IsTrue(result.IsActive);
             Assert.AreEqual(amount, result.Amount);
-            Assert.AreEqual(dateTime, result.DateTime);
+            Assert.AreEqual(dateTime, result.Date);
             Assert.IsNull(result.CancelationDate);
             Assert.IsTrue(string.IsNullOrWhiteSpace(result.ErrorMessage));
             _mockCashInRepository.Verify(c => c.Save(It.IsAny<Domain.Models.CashInModel>()), Times.Once);
-            _mockCashInRepository.Verify(c => c.Get(It.IsAny<int>()), Times.Never);
+            _mockCashInRepository.Verify(c => c.Get(It.IsAny<long>()), Times.Never);
         }
 
         [TestMethod]
@@ -54,11 +54,11 @@ namespace CashFlow.Common.Tests.CashIn
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsActive);
             Assert.AreEqual(0, result.Amount);
-            Assert.AreEqual(DateTime.MinValue, result.DateTime);
+            Assert.AreEqual(DateTime.MinValue, result.Date);
             Assert.IsNull(result.CancelationDate);
             Assert.IsFalse(string.IsNullOrWhiteSpace(result.ErrorMessage));
             _mockCashInRepository.Verify(c => c.Save(It.IsAny<Domain.Models.CashInModel>()), Times.Never);
-            _mockCashInRepository.Verify(c => c.Get(It.IsAny<int>()), Times.Never);
+            _mockCashInRepository.Verify(c => c.Get(It.IsAny<long>()), Times.Never);
         }
 
         [TestMethod]
@@ -77,11 +77,11 @@ namespace CashFlow.Common.Tests.CashIn
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsActive);
             Assert.AreEqual(0, result.Amount);
-            Assert.AreEqual(DateTime.MinValue, result.DateTime);
+            Assert.AreEqual(DateTime.MinValue, result.Date);
             Assert.IsNull(result.CancelationDate);
             Assert.IsFalse(string.IsNullOrWhiteSpace(result.ErrorMessage));
             _mockCashInRepository.Verify(c => c.Save(It.IsAny<Domain.Models.CashInModel>()), Times.Never);
-            _mockCashInRepository.Verify(c => c.Get(It.IsAny<int>()), Times.Never);
+            _mockCashInRepository.Verify(c => c.Get(It.IsAny<long>()), Times.Never);
         }
 
         [TestMethod]
@@ -100,11 +100,11 @@ namespace CashFlow.Common.Tests.CashIn
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsActive);
             Assert.AreEqual(0, result.Amount);
-            Assert.AreEqual(DateTime.MinValue, result.DateTime);
+            Assert.AreEqual(DateTime.MinValue, result.Date);
             Assert.IsNull(result.CancelationDate);
             Assert.IsFalse(string.IsNullOrWhiteSpace(result.ErrorMessage));
             _mockCashInRepository.Verify(c => c.Save(It.IsAny<Domain.Models.CashInModel>()), Times.Never);
-            _mockCashInRepository.Verify(c => c.Get(It.IsAny<int>()), Times.Never);
+            _mockCashInRepository.Verify(c => c.Get(It.IsAny<long>()), Times.Never);
         }
 
         [TestMethod]
@@ -127,11 +127,11 @@ namespace CashFlow.Common.Tests.CashIn
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsActive);
             Assert.AreEqual(0, result.Amount);
-            Assert.AreEqual(DateTime.MinValue, result.DateTime);
+            Assert.AreEqual(DateTime.MinValue, result.Date);
             Assert.IsNull(result.CancelationDate);
             Assert.IsFalse(string.IsNullOrWhiteSpace(result.ErrorMessage));
             _mockCashInRepository.Verify(c => c.Save(It.IsAny<Domain.Models.CashInModel>()), Times.Once);
-            _mockCashInRepository.Verify(c => c.Get(It.IsAny<int>()), Times.Never);
+            _mockCashInRepository.Verify(c => c.Get(It.IsAny<long>()), Times.Never);
         }
 
         [TestMethod]
@@ -141,7 +141,7 @@ namespace CashFlow.Common.Tests.CashIn
 
             _mockCashInRepository.Setup(r => r.Save(It.IsAny<Domain.Models.CashInModel>()))
                 .ReturnsAsync(true);
-            _mockCashInRepository.Setup(r => r.Get(It.IsAny<int>()))
+            _mockCashInRepository.Setup(r => r.Get(It.IsAny<long>()))
                 .ReturnsAsync(cashIn);
 
             ICashInRepository cashInRepository = _mockCashInRepository.Object;
@@ -151,20 +151,20 @@ namespace CashFlow.Common.Tests.CashIn
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsActive);
             Assert.AreEqual(cashIn.Amount, result.Amount);
-            Assert.AreEqual(cashIn.DateTime, result.DateTime);
+            Assert.AreEqual(cashIn.Date, result.Date);
             Assert.IsNotNull(cashIn.CancelationDate);
             Assert.IsTrue(string.IsNullOrWhiteSpace(result.ErrorMessage));
-            _mockCashInRepository.Verify(c => c.Get(It.IsAny<int>()), Times.Once);
+            _mockCashInRepository.Verify(c => c.Get(It.IsAny<long>()), Times.Once);
             _mockCashInRepository.Verify(c => c.Save(It.IsAny<Domain.Models.CashInModel>()), Times.Once);
         }
 
         [TestMethod]
         public void CashIn_cancelation_when_not_found()
         {
-            int cashInId = 197;
+            long cashInId = 197;
             Domain.Models.CashInModel cashIn = null;
 
-            _mockCashInRepository.Setup(r => r.Get(It.IsAny<int>()))
+            _mockCashInRepository.Setup(r => r.Get(It.IsAny<long>()))
                 .ReturnsAsync(cashIn);
 
             ICashInRepository cashInRepository = _mockCashInRepository.Object;
@@ -174,23 +174,23 @@ namespace CashFlow.Common.Tests.CashIn
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsActive);
             Assert.AreEqual(0, result.Amount);
-            Assert.AreEqual(DateTime.MinValue, result.DateTime);
+            Assert.AreEqual(DateTime.MinValue, result.Date);
             Assert.IsNull(result.CancelationDate);
             Assert.IsFalse(string.IsNullOrWhiteSpace(result.ErrorMessage));
-            _mockCashInRepository.Verify(c => c.Get(It.IsAny<int>()), Times.Once);
+            _mockCashInRepository.Verify(c => c.Get(It.IsAny<long>()), Times.Once);
             _mockCashInRepository.Verify(c => c.Save(It.IsAny<Domain.Models.CashInModel>()), Times.Never);
         }
 
         [TestMethod]
         public void CashIn_cancelation_when_throw_exception_on_get()
         {
-            int cashInId = 197;
+            long cashInId = 197;
             Domain.Models.CashInModel cashIn = new Domain.Models.CashInModel(cashInId, 50.98m, DateTime.Now);
 
             _mockCashInRepository.Setup(r => r.Save(It.IsAny<Domain.Models.CashInModel>()))
                 .ReturnsAsync(true);
 
-            _mockCashInRepository.Setup(r => r.Get(It.IsAny<int>()))
+            _mockCashInRepository.Setup(r => r.Get(It.IsAny<long>()))
                 .Callback(() =>
                 {
                     throw new Exception("Exceção de Teste", new Exception("Exceção Interna de Teste"));
@@ -204,17 +204,17 @@ namespace CashFlow.Common.Tests.CashIn
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsActive);
             Assert.AreEqual(0, result.Amount);
-            Assert.AreEqual(DateTime.MinValue, result.DateTime);
+            Assert.AreEqual(DateTime.MinValue, result.Date);
             Assert.IsNull(result.CancelationDate);
             Assert.IsFalse(string.IsNullOrWhiteSpace(result.ErrorMessage));
-            _mockCashInRepository.Verify(c => c.Get(It.IsAny<int>()), Times.Once);
+            _mockCashInRepository.Verify(c => c.Get(It.IsAny<long>()), Times.Once);
             _mockCashInRepository.Verify(c => c.Save(It.IsAny<Domain.Models.CashInModel>()), Times.Never);
         }
 
         [TestMethod]
         public void CashIn_cancelation_when_throw_exception_on_save()
         {
-            int cashInId = 197;
+            long cashInId = 197;
             Domain.Models.CashInModel cashIn = new Domain.Models.CashInModel(cashInId, 50.98m, DateTime.Now);
 
             _mockCashInRepository.Setup(r => r.Save(It.IsAny<Domain.Models.CashInModel>()))
@@ -224,7 +224,7 @@ namespace CashFlow.Common.Tests.CashIn
                 })
                 .ReturnsAsync(true);
 
-            _mockCashInRepository.Setup(r => r.Get(It.IsAny<int>()))
+            _mockCashInRepository.Setup(r => r.Get(It.IsAny<long>()))
                 .ReturnsAsync(cashIn);
 
             ICashInRepository cashInRepository = _mockCashInRepository.Object;
@@ -234,10 +234,10 @@ namespace CashFlow.Common.Tests.CashIn
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsActive);
             Assert.AreEqual(0, result.Amount);
-            Assert.AreEqual(DateTime.MinValue, result.DateTime);
+            Assert.AreEqual(DateTime.MinValue, result.Date);
             Assert.IsNull(result.CancelationDate);
             Assert.IsFalse(string.IsNullOrWhiteSpace(result.ErrorMessage));
-            _mockCashInRepository.Verify(c => c.Get(It.IsAny<int>()), Times.Once);
+            _mockCashInRepository.Verify(c => c.Get(It.IsAny<long>()), Times.Once);
             _mockCashInRepository.Verify(c => c.Save(It.IsAny<Domain.Models.CashInModel>()), Times.Once);
         }
     }
