@@ -47,7 +47,7 @@ namespace CashFlow.Domain.Services
                 MessageModel message = new MessageModel()
                 {
                     RoutingKey = typeof(CashOutModel).Name,
-                    Body = JsonUtils.Serialize(cashOut)
+                    Body = JsonUtils.Serialize(cashOutResult)
                 };
                 await _messageSender.Send(message);
 
@@ -84,7 +84,7 @@ namespace CashFlow.Domain.Services
                 MessageModel message = new MessageModel()
                 {
                     RoutingKey = typeof(CashOutModel).Name,
-                    Body = JsonUtils.Serialize(cashOut)
+                    Body = JsonUtils.Serialize(cashOutCanceledResult)
                 };
                 await _messageSender.Send(message);
 

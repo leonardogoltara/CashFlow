@@ -34,7 +34,7 @@ namespace CashFlow.Messaging
                     var body = Encoding.UTF8.GetBytes(message.Body);
 
                     channel.BasicPublish(exchange: "",
-                                         routingKey: message.RoutingKey,
+                                         routingKey: _messageQueueConfiguration.QueueName,
                                          basicProperties: null,
                                          body: body);
 
