@@ -1,4 +1,5 @@
-﻿using CashFlow.Domain.Repository;
+﻿using CashFlow.Common.Messaging;
+using CashFlow.Domain.Repository;
 using CashFlow.Domain.Services;
 using Moq;
 
@@ -8,10 +9,12 @@ namespace CashFlow.Domain.Tests.CashOut
     public class CashOutServiceTests
     {
         private Mock<ICashOutRepository> _mockCashOutRepository;
+        private Mock<IMessageSender> _messageSender;
 
         public CashOutServiceTests()
         {
             _mockCashOutRepository = new Mock<ICashOutRepository>();
+            _messageSender = new Mock<IMessageSender>();
         }
 
         [TestMethod]
@@ -24,7 +27,7 @@ namespace CashFlow.Domain.Tests.CashOut
                 .ReturnsAsync(true);
 
             ICashOutRepository cashOutRepository = _mockCashOutRepository.Object;
-            var service = new CashOutService(cashOutRepository);
+            var service = new CashOutService(cashOutRepository, _messageSender.Object);
             var result = service.Save(amount, dateTime).GetAwaiter().GetResult();
 
             Assert.IsNotNull(result);
@@ -47,7 +50,7 @@ namespace CashFlow.Domain.Tests.CashOut
                 .ReturnsAsync(true);
 
             ICashOutRepository cashOutRepository = _mockCashOutRepository.Object;
-            var service = new CashOutService(cashOutRepository);
+            var service = new CashOutService(cashOutRepository, _messageSender.Object);
             var result = service.Save(amount, dateTime).GetAwaiter().GetResult();
 
             Assert.IsNotNull(result);
@@ -70,7 +73,7 @@ namespace CashFlow.Domain.Tests.CashOut
                 .ReturnsAsync(true);
 
             ICashOutRepository cashOutRepository = _mockCashOutRepository.Object;
-            var service = new CashOutService(cashOutRepository);
+            var service = new CashOutService(cashOutRepository, _messageSender.Object);
             var result = service.Save(amount, dateTime).GetAwaiter().GetResult();
 
             Assert.IsNotNull(result);
@@ -93,7 +96,7 @@ namespace CashFlow.Domain.Tests.CashOut
                 .ReturnsAsync(true);
 
             ICashOutRepository cashOutRepository = _mockCashOutRepository.Object;
-            var service = new CashOutService(cashOutRepository);
+            var service = new CashOutService(cashOutRepository, _messageSender.Object);
             var result = service.Save(amount, dateTime).GetAwaiter().GetResult();
 
             Assert.IsNotNull(result);
@@ -120,7 +123,7 @@ namespace CashFlow.Domain.Tests.CashOut
                 .ReturnsAsync(true);
 
             ICashOutRepository cashOutRepository = _mockCashOutRepository.Object;
-            var service = new CashOutService(cashOutRepository);
+            var service = new CashOutService(cashOutRepository, _messageSender.Object);
             var result = service.Save(amount, dateTime).GetAwaiter().GetResult();
 
             Assert.IsNotNull(result);
@@ -144,7 +147,7 @@ namespace CashFlow.Domain.Tests.CashOut
                 .ReturnsAsync(cashOut);
 
             ICashOutRepository cashOutRepository = _mockCashOutRepository.Object;
-            var service = new CashOutService(cashOutRepository);
+            var service = new CashOutService(cashOutRepository, _messageSender.Object);
             var result = service.Cancel(cashOut.Id).GetAwaiter().GetResult();
 
             Assert.IsNotNull(result);
@@ -167,7 +170,7 @@ namespace CashFlow.Domain.Tests.CashOut
                 .ReturnsAsync(cashOut);
 
             ICashOutRepository cashOutRepository = _mockCashOutRepository.Object;
-            var service = new CashOutService(cashOutRepository);
+            var service = new CashOutService(cashOutRepository, _messageSender.Object);
             var result = service.Cancel(cashOutId).GetAwaiter().GetResult();
 
             Assert.IsNotNull(result);
@@ -197,7 +200,7 @@ namespace CashFlow.Domain.Tests.CashOut
                 .ReturnsAsync(cashOut);
 
             ICashOutRepository cashOutRepository = _mockCashOutRepository.Object;
-            var service = new CashOutService(cashOutRepository);
+            var service = new CashOutService(cashOutRepository, _messageSender.Object);
             var result = service.Cancel(cashOutId).GetAwaiter().GetResult();
 
             Assert.IsNotNull(result);
@@ -227,7 +230,7 @@ namespace CashFlow.Domain.Tests.CashOut
                 .ReturnsAsync(cashOut);
 
             ICashOutRepository cashOutRepository = _mockCashOutRepository.Object;
-            var service = new CashOutService(cashOutRepository);
+            var service = new CashOutService(cashOutRepository, _messageSender.Object);
             var result = service.Cancel(cashOutId).GetAwaiter().GetResult();
 
             Assert.IsNotNull(result);
