@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  cashflow.operation:
+    image: ${DOCKER_REGISTRY-}cashflowoperation
+    build:
+      context: .
+      dockerfile: CashFlow.Operation/Dockerfile
+
+  cashflow.report:
+    image: ${DOCKER_REGISTRY-}cashflowreport
+    build:
+      context: .
+      dockerfile: CashFlow.Report/Dockerfile

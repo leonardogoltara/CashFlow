@@ -27,7 +27,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{54685F72
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CashFlow.Common.API", "CashFlow.Common.API\CashFlow.Common.API.csproj", "{5A6654CC-1057-4229-A36B-5B99B6D52CD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashFlow.Messaging", "CashFlow.Messaging\CashFlow.Messaging.csproj", "{49369466-06FB-4BB4-834C-DC75A8F6248C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CashFlow.Messaging", "CashFlow.Messaging\CashFlow.Messaging.csproj", "{49369466-06FB-4BB4-834C-DC75A8F6248C}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{666130BB-CD97-4EAA-B9CD-FEB678B9F885}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,10 @@ Global
 		{49369466-06FB-4BB4-834C-DC75A8F6248C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49369466-06FB-4BB4-834C-DC75A8F6248C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49369466-06FB-4BB4-834C-DC75A8F6248C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{666130BB-CD97-4EAA-B9CD-FEB678B9F885}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{666130BB-CD97-4EAA-B9CD-FEB678B9F885}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{666130BB-CD97-4EAA-B9CD-FEB678B9F885}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{666130BB-CD97-4EAA-B9CD-FEB678B9F885}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

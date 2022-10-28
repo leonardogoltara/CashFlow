@@ -1,0 +1,28 @@
+version: '3.7'
+
+networks:
+  cashflow:
+    external: true
+
+services:
+  cashflow.operation:
+    hostname: operation
+    container_name: operation
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "5003:80"
+    networks:
+      cashflow:
+        ipv4_address: 172.19.0.203
+
+  cashflow.report:
+    hostname: report
+    container_name: report
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "5002:80"
+    networks:
+      cashflow:
+        ipv4_address: 172.19.0.202
