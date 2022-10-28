@@ -21,7 +21,11 @@ Aplicação de fluxo de caixa construida na arquitetura de microserviço em conj
 ### Obg: É necessario ter o docker instalado
 - Executar os arquivos postgres.bat e rabbitmq.bat dentro da pasta "\doc"
 - Executar os projetos no Visual Studio.
+	- CashFlow.Operation
+	- CashFlow.Report
+	- CashFlow.WorkService
 - Utilizar a collection do postman em docs para testar api em "\doc\CashFlow.postman_collection.json"
+	- Atenção para as portas utilizadas.
 
 ## Testes
 - Testes unitários para validar as regras de negócio.
