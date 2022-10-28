@@ -2,7 +2,7 @@
 {
     public interface IMessage
     {
-        public string Body { get; set; }
+        public object Body { get; set; }
         public string RoutingKey { get; set; }
     }
 }

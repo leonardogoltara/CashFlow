@@ -45,7 +45,7 @@ namespace CashFlow.Domain.Services
 
                 MessageModel message = new MessageModel()
                 {
-                    Body = cashOut.ToString()
+                    Body = cashOut.Date
                 };
                 await _messageSender.Send(message);
 
@@ -81,7 +81,7 @@ namespace CashFlow.Domain.Services
 
                 MessageModel message = new MessageModel()
                 {
-                    Body = cashOut.ToString()
+                    Body = cashOut.Date
                 };
                 await _messageSender.Send(message);
 

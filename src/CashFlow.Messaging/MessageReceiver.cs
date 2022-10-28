@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CashFlow.Messaging
 {
-    public class MessageReceiver
+    public class MessageReceiver : IMessageReceiver
     {
         IMessageQueueConfiguration _messageQueueConfiguration;
         public MessageReceiver(IMessageQueueConfiguration messageQueueConfiguration)
