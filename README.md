@@ -18,3 +18,7 @@ docker run --name teste-postgres -e "POSTGRES_PASSWORD=Postgres2018!" -p 5432:54
 
 // ConnectionString:
 //      User ID=postgres;Password=Postgres2018!;Host=localhost;Port=5432;Database=postgres;Pooling=false
+
+## Servidor RabbitMQ
+
+docker run --name rabbitmq -e "RABBITMQ_DEFAULT_USER=test-user" -e "RABBITMQ_DEFAULT_PASS=test-user" -p 5672:5672 -p 15672:15672 rabbitmq:3.10-management
