@@ -37,6 +37,7 @@ builder.Services.AddTransient<CashFlowConsolidationService>();
 
 var app = builder.Build();
 
+app.AppUseMigrations();
 app.UseSwagger();
 app.UseSwaggerUI();
 

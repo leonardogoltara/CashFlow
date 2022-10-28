@@ -43,6 +43,7 @@ builder.Services.AddTransient<IMessageSender, MessageSender>();
 
 var app = builder.Build();
 
+app.AppUseMigrations();
 app.UseSwagger();
 app.UseSwaggerUI();
 
