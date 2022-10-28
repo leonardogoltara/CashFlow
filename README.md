@@ -1,6 +1,7 @@
 # CashFlow
 ## Pendências
 - RabbitMQ
+  - Servidor em docker com roteiro de instalação.
   - Send message no Service
   - Receive message no WorkService
 
