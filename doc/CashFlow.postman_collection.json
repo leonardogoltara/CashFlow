@@ -1,0 +1,312 @@
+{
+	"info": {
+		"_postman_id": "a59e2751-ae55-40f8-bad5-7036a2ef4278",
+		"name": "CashFlow",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3966403"
+	},
+	"item": [
+		{
+			"name": "Operation",
+			"item": [
+				{
+					"name": "/CashIn",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": 30.97,\n  \"date\": \"2022-10-28\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}{{OperationPort}}/CashIn",
+							"host": [
+								"{{baseUrl}}{{OperationPort}}"
+							],
+							"path": [
+								"CashIn"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"amount\": 30.97,\n  \"date\": \"2022-10-28\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}{{OperationPort}}/CashIn",
+									"host": [
+										"{{baseUrl}}{{OperationPort}}"
+									],
+									"path": [
+										"CashIn"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 Oct 2022 00:35:25 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"amount\": 30.97,\n        \"date\": \"2022-10-28T00:00:00\",\n        \"id\": 5,\n        \"updatedDate\": \"2022-10-27T21:35:21.6051827-03:00\",\n        \"cancelationDate\": null,\n        \"isActive\": true,\n        \"errorMessage\": null,\n        \"hasError\": false\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "/CashOut",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": 15.97,\n  \"date\": \"2022-10-28\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}{{OperationPort}}/CashOut",
+							"host": [
+								"{{baseUrl}}{{OperationPort}}"
+							],
+							"path": [
+								"CashOut"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"amount\": 15.97,\n  \"date\": \"2022-10-28\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}{{OperationPort}}/CashOut",
+									"host": [
+										"{{baseUrl}}{{OperationPort}}"
+									],
+									"path": [
+										"CashOut"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 Oct 2022 00:35:38 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"amount\": 15.97,\n        \"date\": \"2022-10-28T00:00:00\",\n        \"id\": 6,\n        \"updatedDate\": \"2022-10-27T21:35:38.5913835-03:00\",\n        \"cancelationDate\": null,\n        \"isActive\": true,\n        \"errorMessage\": null,\n        \"hasError\": false\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Report",
+			"item": [
+				{
+					"name": "/ConsolidatedCash",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"date\": \"2022-10-28\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}{{ReportPort}}/ConsolidatedCash",
+							"host": [
+								"{{baseUrl}}{{ReportPort}}"
+							],
+							"path": [
+								"ConsolidatedCash"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"date\": \"2022-10-28\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}{{ReportPort}}/ConsolidatedCash",
+									"host": [
+										"{{baseUrl}}{{ReportPort}}"
+									],
+									"path": [
+										"ConsolidatedCash"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 Oct 2022 00:34:12 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"consolidateDayResult\": {\n            \"day\": \"2022-10-28T00:00:00\",\n            \"cashInAmout\": 15.97,\n            \"cashOutAmout\": 30.97\n        },\n        \"consolidateMonthResult\": {\n            \"month\": \"2022-10-01T00:00:00\",\n            \"cashInAmout\": 39.91,\n            \"cashOutAmout\": 63.97\n        },\n        \"consolidateYearResult\": {\n            \"year\": 2022,\n            \"cashInAmout\": 39.91,\n            \"cashOutAmout\": 63.97\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:",
+			"type": "string"
+		},
+		{
+			"key": "OperationPort",
+			"value": "5291",
+			"type": "string"
+		},
+		{
+			"key": "ReportPort",
+			"value": "5083",
+			"type": "string"
+		}
+	]
+}
