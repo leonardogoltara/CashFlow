@@ -1,5 +1,4 @@
-﻿using CashFlow.Domain;
-using CashFlow.Domain.Models;
+﻿using CashFlow.Domain.Models;
 using CashFlow.Domain.Repository;
 using CashFlow.Domain.Results;
 using CashFlow.Domain.Services;
@@ -76,7 +75,7 @@ namespace CashFlow.Domain.Tests.CashFlowConsolidation
                 .ReturnsAsync(true);
 
             _consolidateMonthRepository.Setup(c => c.Get(It.IsAny<DateTime>()))
-                .ReturnsAsync((DateTime date) => _consolidateMonthModels.FirstOrDefault(x => x.Month == date));
+                .ReturnsAsync((DateTime date) => _consolidateMonthModels.FirstOrDefault(x => x.Month.Month == date.Month && x.Month.Year == date.Year));
 
             _consolidateMonthRepository.Setup(c => c.SumAmountByYear(It.IsAny<int>()))
                 .ReturnsAsync((int year) => new ConsolidateMonthResult()
@@ -141,6 +140,26 @@ namespace CashFlow.Domain.Tests.CashFlowConsolidation
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result);
+            Assert.AreEqual(1, _consolidateYearModels.Count);
+        }
+
+        [TestMethod]
+        public void GetConsolidated_when_success()
+        {
+            var service = new CashFlowConsolidationService(_cashInRepository.Object, _cashOutRepository.Object, _consolidateDayRepository.Object,
+              _consolidateMonthRepository.Object, _consolidateYearRepository.Object);
+
+            // Consolida
+            service.ConsolidateDay(new DateTime(2022, 10, 26)).GetAwaiter().GetResult();
+           
+            var result = service.GetConsolidated(new DateTime(2022, 10, 26)).GetAwaiter().GetResult();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ConsolidateDayResult);
+            Assert.IsNotNull(result.ConsolidateMonthResult);
+            Assert.IsNotNull(result.ConsolidateYearResult);
+            Assert.AreEqual(1, _consolidateDayModels.Count);
+            Assert.AreEqual(1, _consolidateMonthModels.Count);
             Assert.AreEqual(1, _consolidateYearModels.Count);
         }
     }

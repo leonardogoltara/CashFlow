@@ -16,6 +16,7 @@ namespace CashFlow.Persistence.Repository
 
         public async Task<ConsolidateMonthModel> Get(DateTime date)
         {
+            date = new DateTime(date.Year, date.Month, 1);
             return await _context.ConsolidateMonths.FirstOrDefaultAsync(x => x.Month == date);
         }
 
@@ -38,7 +39,7 @@ namespace CashFlow.Persistence.Repository
         {
             var result = await _context.ConsolidateMonths
                  .Where(x => x.Month.Year == year)
-                 .GroupBy(x => x.Month)
+                 .GroupBy(x => x.Month.Year)
                  .Select(x => new ConsolidateMonthResult()
                  {
                      CashInAmout = x.Select(c => c.CashInAmout).Sum(),

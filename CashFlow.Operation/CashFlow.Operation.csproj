@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CashFlow.Common.API\CashFlow.Common.API.csproj" />
     <ProjectReference Include="..\CashFlow.Persistence\CashFlow.Persistence.csproj" />
   </ItemGroup>
 

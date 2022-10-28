@@ -1,8 +1,8 @@
 ﻿namespace CashFlow.Domain.Results
 {
-    public class ConsolidateMonthResult
+    public class ConsolidateYearResult
     {
-        public DateTime Month { get; set; }
+        public int Year { get; set; }
         public decimal CashInAmout { get; set; }
         public decimal CashOutAmout { get; set; }
     }

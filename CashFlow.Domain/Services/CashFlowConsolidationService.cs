@@ -127,5 +127,19 @@ namespace CashFlow.Domain.Services
                 return false;
             }
         }
+
+        public async Task<ConsolidateResult> GetConsolidated(DateTime date)
+        {
+            ConsolidateResult consolidateResult = new ConsolidateResult();
+            var consolidateDay  = await _consolidateDayRepository.Get(date);
+            var consolidateMonth = await _consolidateMonthRepository.Get(date);
+            var consolidateYear = await _consolidateYearRepository.Get(date.Year);
+
+            consolidateResult.ConsolidateDayResult = _mapper.Map<ConsolidateDayResult>(consolidateDay);
+            consolidateResult.ConsolidateMonthResult = _mapper.Map<ConsolidateMonthResult>(consolidateMonth);
+            consolidateResult.ConsolidateYearResult = _mapper.Map<ConsolidateYearResult>(consolidateYear);
+
+            return consolidateResult;
+        }
     }
 }

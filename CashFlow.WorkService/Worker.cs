@@ -1,6 +1,5 @@
 using CashFlow.Common.ExtensionsMethods;
 using CashFlow.Domain.Services;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace CashFlow.WorkService
 {

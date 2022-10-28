@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CashFlow.Domain.DTOs;
 using CashFlow.Domain.Models;
+using CashFlow.Domain.Results;
 
 namespace CashFlow.Domain
 {
@@ -12,6 +13,9 @@ namespace CashFlow.Domain
             {
                 cfg.CreateMap<CashInModel, CashInResult>();
                 cfg.CreateMap<CashOutModel, CashOutResult>();
+                cfg.CreateMap<ConsolidateDayModel, ConsolidateDayResult>();
+                cfg.CreateMap<ConsolidateMonthModel, ConsolidateMonthResult>();
+                cfg.CreateMap<ConsolidateYearModel, ConsolidateYearResult>();
             });
 
             IMapper mapper = config.CreateMapper();

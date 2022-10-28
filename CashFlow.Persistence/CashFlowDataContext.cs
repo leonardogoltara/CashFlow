@@ -1,13 +1,7 @@
 ﻿using CashFlow.Domain.Models;
 using CashFlow.Persistence.Mappings;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CashFlow.Persistence
 {

@@ -1,4 +1,4 @@
-﻿namespace CashFlow.Operation.Utils
+﻿namespace CashFlow.Common.API.Responses
 {
     public static class AppResults
     {
