@@ -25,7 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CashFlow.Domain.Tests", "Ca
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{54685F72-C43E-4C7D-9E84-A7A32CA3958F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashFlow.Common.API", "CashFlow.Common.API\CashFlow.Common.API.csproj", "{5A6654CC-1057-4229-A36B-5B99B6D52CD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CashFlow.Common.API", "CashFlow.Common.API\CashFlow.Common.API.csproj", "{5A6654CC-1057-4229-A36B-5B99B6D52CD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashFlow.Messaging", "CashFlow.Messaging\CashFlow.Messaging.csproj", "{49369466-06FB-4BB4-834C-DC75A8F6248C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +67,10 @@ Global
 		{5A6654CC-1057-4229-A36B-5B99B6D52CD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A6654CC-1057-4229-A36B-5B99B6D52CD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A6654CC-1057-4229-A36B-5B99B6D52CD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49369466-06FB-4BB4-834C-DC75A8F6248C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49369466-06FB-4BB4-834C-DC75A8F6248C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49369466-06FB-4BB4-834C-DC75A8F6248C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49369466-06FB-4BB4-834C-DC75A8F6248C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +84,7 @@ Global
 		{2E4BAC3A-1CC7-446C-A14B-B0FE95CB15FD} = {54685F72-C43E-4C7D-9E84-A7A32CA3958F}
 		{BDA7F593-68E5-4D6A-8F23-D735EC5C68FF} = {03963D2F-6F33-4BED-91B8-33ACE8B4BD33}
 		{5A6654CC-1057-4229-A36B-5B99B6D52CD3} = {9317C6D4-D818-4A21-802B-53C53D64CB11}
+		{49369466-06FB-4BB4-834C-DC75A8F6248C} = {54685F72-C43E-4C7D-9E84-A7A32CA3958F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F9A21DCF-BAFF-4AA6-AD7A-50D0D1B0C280}

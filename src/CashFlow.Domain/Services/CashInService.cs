@@ -3,18 +3,23 @@ using CashFlow.Domain.DTOs;
 using CashFlow.Common.ExtensionsMethods;
 using CashFlow.Domain.Models;
 using CashFlow.Domain.Repository;
+using CashFlow.Common.Messaging;
+using CashFlow.Domain.Messaging;
+using System.Text.Json.Nodes;
 
 namespace CashFlow.Domain.Services
 {
     public class CashInService
     {
         private ICashInRepository _cashInRepository;
+        private IMessageSender _messageSender;
         private IMapper _mapper;
 
-        public CashInService(ICashInRepository cashInRepository)
+        public CashInService(ICashInRepository cashInRepository, IMessageSender messageSender)
         {
             _cashInRepository = cashInRepository;
             _mapper = Mapper.GetMaps();
+            _messageSender = messageSender;
         }
 
         public async Task<CashInResult> Save(decimal amount, DateTime date)
@@ -38,6 +43,12 @@ namespace CashFlow.Domain.Services
                 var cashIn = new CashInModel(amount, date);
                 await _cashInRepository.Save(cashIn);
                 cashInResult = _mapper.Map<CashInResult>(cashIn);
+
+                MessageModel message = new MessageModel()
+                {
+                    Body = cashIn.ToString()
+                };
+                await _messageSender.Send(message);
 
                 return cashInResult;
             }
@@ -67,6 +78,12 @@ namespace CashFlow.Domain.Services
                 cashIn.Cancel();
                 await _cashInRepository.Save(cashIn);
                 cashInCanceledResult = _mapper.Map<CashInResult>(cashIn);
+
+                MessageModel message = new MessageModel()
+                {
+                    Body = cashIn.ToString()
+                };
+                await _messageSender.Send(message);
 
                 return cashInCanceledResult;
             }

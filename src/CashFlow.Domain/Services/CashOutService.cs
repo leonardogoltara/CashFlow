@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using CashFlow.Common.ExtensionsMethods;
+using CashFlow.Common.Messaging;
 using CashFlow.Domain.DTOs;
+using CashFlow.Domain.Messaging;
 using CashFlow.Domain.Models;
 using CashFlow.Domain.Repository;
 
@@ -9,12 +11,14 @@ namespace CashFlow.Domain.Services
     public class CashOutService
     {
         private ICashOutRepository _cashOutRepository;
+        private IMessageSender _messageSender;
         private IMapper _mapper;
 
-        public CashOutService(ICashOutRepository cashOutRepository)
+        public CashOutService(ICashOutRepository cashOutRepository, IMessageSender messageSender)
         {
             _cashOutRepository = cashOutRepository;
             _mapper = Mapper.GetMaps();
+            _messageSender = messageSender;
         }
 
         public async Task<CashOutResult> Save(decimal amount, DateTime date)
@@ -39,6 +43,12 @@ namespace CashFlow.Domain.Services
                 await _cashOutRepository.Save(cashOut);
                 cashOutResult = _mapper.Map<CashOutResult>(cashOut);
 
+                MessageModel message = new MessageModel()
+                {
+                    Body = cashOut.ToString()
+                };
+                await _messageSender.Send(message);
+
                 return cashOutResult;
             }
             catch (Exception ex)
@@ -54,7 +64,7 @@ namespace CashFlow.Domain.Services
         public async Task<CashOutResult> Cancel(long id)
         {
             CashOutResult cashOutCanceledResult = new CashOutResult();
-           
+
             try
             {
                 var cashOut = await _cashOutRepository.Get(id);
@@ -68,6 +78,12 @@ namespace CashFlow.Domain.Services
                 cashOut.Cancel();
                 await _cashOutRepository.Save(cashOut);
                 cashOutCanceledResult = _mapper.Map<CashOutResult>(cashOut);
+
+                MessageModel message = new MessageModel()
+                {
+                    Body = cashOut.ToString()
+                };
+                await _messageSender.Send(message);
 
                 return cashOutCanceledResult;
             }
