@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CashFlow.Common.ExtensionsMethods;
+using CashFlow.Common.JsonHelper;
 using CashFlow.Common.Messaging;
 using CashFlow.Domain.DTOs;
 using CashFlow.Domain.Messaging;
@@ -45,7 +46,8 @@ namespace CashFlow.Domain.Services
 
                 MessageModel message = new MessageModel()
                 {
-                    Body = cashOut.Date
+                    RoutingKey = typeof(CashOutModel).Name,
+                    Body = JsonUtils.Serialize(cashOut)
                 };
                 await _messageSender.Send(message);
 
@@ -81,7 +83,8 @@ namespace CashFlow.Domain.Services
 
                 MessageModel message = new MessageModel()
                 {
-                    Body = cashOut.Date
+                    RoutingKey = typeof(CashOutModel).Name,
+                    Body = JsonUtils.Serialize(cashOut)
                 };
                 await _messageSender.Send(message);
 

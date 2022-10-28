@@ -1,7 +1,11 @@
 using CashFlow.Common.API.Responses;
+using CashFlow.Common.Messaging;
 using CashFlow.Domain.DTOs;
+using CashFlow.Domain.Messaging;
 using CashFlow.Domain.Repository;
 using CashFlow.Domain.Services;
+using CashFlow.Messaging;
+using CashFlow.Operation;
 using CashFlow.Persistence;
 using CashFlow.Persistence.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +36,10 @@ builder.Services.AddTransient<ICashInRepository, CashInRepository>();
 builder.Services.AddTransient<ICashOutRepository, CashOutRepository>();
 builder.Services.AddTransient<CashInService>();
 builder.Services.AddTransient<CashOutService>();
+
+builder.Services.AddTransient<IMessageQueueConfiguration, MessageQueueConfiguration>();
+builder.Services.AddTransient<IMessage, MessageModel>();
+builder.Services.AddTransient<IMessageSender, MessageSender>();
 
 var app = builder.Build();
 

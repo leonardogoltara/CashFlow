@@ -6,6 +6,7 @@ using CashFlow.Domain.Repository;
 using CashFlow.Common.Messaging;
 using CashFlow.Domain.Messaging;
 using System.Text.Json.Nodes;
+using CashFlow.Common.JsonHelper;
 
 namespace CashFlow.Domain.Services
 {
@@ -46,7 +47,8 @@ namespace CashFlow.Domain.Services
 
                 MessageModel message = new MessageModel()
                 {
-                    Body = cashIn.Date
+                    RoutingKey = typeof(CashInModel).Name,
+                    Body = JsonUtils.Serialize(cashIn)
                 };
                 await _messageSender.Send(message);
 
@@ -81,7 +83,8 @@ namespace CashFlow.Domain.Services
 
                 MessageModel message = new MessageModel()
                 {
-                    Body = cashIn.Date
+                    RoutingKey = typeof(CashInModel).Name,
+                    Body = JsonUtils.Serialize(cashIn)
                 };
                 await _messageSender.Send(message);
 

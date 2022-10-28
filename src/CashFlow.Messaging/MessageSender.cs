@@ -5,23 +5,28 @@ using System.Text;
 
 namespace CashFlow.Messaging
 {
-    internal class MessageSender : IMessageSender
+    public class MessageSender : IMessageSender
     {
         IMessageQueueConfiguration _messageQueueConfiguration;
         public MessageSender(IMessageQueueConfiguration messageQueueConfiguration)
         {
-            _messageQueueConfiguration = messageQueueConfiguration; 
+            _messageQueueConfiguration = messageQueueConfiguration;
         }
         public async Task<bool> Send(IMessage message)
         {
-			try
-			{
-                var factory = new ConnectionFactory() { HostName = _messageQueueConfiguration.QueueUrl };
+            try
+            {
+                var factory = new ConnectionFactory()
+                {
+                    HostName = _messageQueueConfiguration.QueueUrl,
+                    UserName = _messageQueueConfiguration.UserName,
+                    Password = _messageQueueConfiguration.Password
+                };
                 using (var connection = factory.CreateConnection())
                 using (var channel = connection.CreateModel())
                 {
                     channel.QueueDeclare(queue: _messageQueueConfiguration.QueueName,
-                                         durable: false,
+                                         durable: true,
                                          exclusive: false,
                                          autoDelete: false,
                                          arguments: null);
@@ -33,16 +38,16 @@ namespace CashFlow.Messaging
                                          basicProperties: null,
                                          body: body);
 
-                    Console.WriteLine(" [x] Sent {0}", message);
+                    Console.WriteLine(" [x] Sent {0}", message.Body);
                 }
 
                 return true;
             }
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.GetCompleteMessage());
-				return false;
-			}
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.GetCompleteMessage());
+                return false;
+            }
         }
     }
 }

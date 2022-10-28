@@ -16,12 +16,17 @@ namespace CashFlow.Messaging
         public async Task<IMessage> Receive()
         {
             IMessage message = null;
-            var factory = new ConnectionFactory() { HostName = _messageQueueConfiguration.QueueUrl };
+            var factory = new ConnectionFactory()
+            {
+                HostName = _messageQueueConfiguration.QueueUrl,
+                UserName = _messageQueueConfiguration.UserName,
+                Password = _messageQueueConfiguration.Password
+            };
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
                 channel.QueueDeclare(queue: _messageQueueConfiguration.QueueName,
-                                     durable: false,
+                                     durable: true,
                                      exclusive: false,
                                      autoDelete: false,
                                      arguments: null);

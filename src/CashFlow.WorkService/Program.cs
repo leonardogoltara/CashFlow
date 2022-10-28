@@ -1,5 +1,8 @@
+using CashFlow.Common.Messaging;
+using CashFlow.Domain.Messaging;
 using CashFlow.Domain.Repository;
 using CashFlow.Domain.Services;
+using CashFlow.Messaging;
 using CashFlow.Persistence;
 using CashFlow.Persistence.Repository;
 using CashFlow.WorkService;
@@ -15,6 +18,10 @@ IHost host = Host.CreateDefaultBuilder(args)
         services.AddTransient<IConsolidateDayRepository, ConsolidateDayRepository>();
         services.AddTransient<IConsolidateMonthRepository, ConsolidateMonthRepository>();
         services.AddTransient<IConsolidateYearRepository, ConsolidateYearRepository>();
+
+        services.AddTransient<IMessageQueueConfiguration, MessageQueueConfiguration>();
+        services.AddTransient<IMessage, MessageModel>();
+        services.AddTransient<IMessageReceiver, MessageReceiver>();
 
         services.AddTransient<CashFlowConsolidationService>();
         

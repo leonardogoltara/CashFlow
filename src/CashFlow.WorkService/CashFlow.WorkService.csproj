@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CashFlow.Domain\CashFlow.Domain.csproj" />
+    <ProjectReference Include="..\CashFlow.Messaging\CashFlow.Messaging.csproj" />
     <ProjectReference Include="..\CashFlow.Persistence\CashFlow.Persistence.csproj" />
   </ItemGroup>
 </Project>
