@@ -1,24 +1,27 @@
 # CashFlow
-## Pendências
+Aplicação de fluxo de caixa construida na arquitetura de microserviço em conjunto com as boas praticas de desenvolvimento, código limpo e os principios do SOLID.
+
+## Desenho da arquitetura
+![image](https://user-images.githubusercontent.com/3799361/198635042-23b5c12e-1088-4b2a-9a4c-31e0ad779659.png)
+
+## Padrões de microserviço utilizados
+- Shared database
+- Messaging
+- Externalized configuration
+
+## Tecnologias e bibliotecas usadas
+- .NET 6
+- EntityFramework Core
+- Postgres
 - RabbitMQ
-  - Servidor em docker com roteiro de instalação.
-  - Send message no Service
-  - Receive message no WorkService
+- AutoMapper
+- Swagger
 
+## Execução do projeto
+### Obg: É necessario ter o docker instalado
+- Executar os arquivos postgres.bat e rabbitmq.bat dentro da pasta "\doc"
+- Executar o serviços pelo arquivo de docker-compose em \src
+- Utilizar a collection do postman em docs para testar api em "\doc\CashFlow.postman_collection.json"
 
-# Rodando a Aplicação
-
-## Banco Postgres
-
-docker pull postgres
-
-md "C:\PostgreSQL"
-
-docker run --name teste-postgres -e "POSTGRES_PASSWORD=Postgres2018!" -p 5432:5432 -v "C:\PostgreSQL":/var/lib/postgresql/data -d postgres
-
-// ConnectionString:
-//      User ID=postgres;Password=Postgres2018!;Host=localhost;Port=5432;Database=postgres;Pooling=false
-
-## Servidor RabbitMQ
-
-docker run --name rabbitmq -e "RABBITMQ_DEFAULT_USER=test-user" -e "RABBITMQ_DEFAULT_PASS=test-user" -p 5672:5672 -p 15672:15672 rabbitmq:3.10-management
+## Testes
+- Testes unitários para validar as regras de negócio.
