@@ -5,11 +5,37 @@ networks:
     external: true
 
 services:
+  cashflow-postgres:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Postgres2018!
+    ports:
+      - '5432:5432'
+    volumes: 
+      - cashflow-postgres:/var/lib/postgresql/data
+    networks:
+      cashflow:
+        ipv4_address: 172.19.0.201
+
+  cashflow-rabbitMQ:
+    image: rabbitmq:3.10-management
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=test-user
+      - RABBITMQ_DEFAULT_PASS=test-user
+    ports:
+      - '5672:5672'
+    networks:
+      cashflow:
+        ipv4_address: 172.19.0.202
+
   cashflow.operation:
     hostname: operation
     container_name: operation
     environment:
-      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_ENVIRONMENT: Docker
     ports:
       - "5003:80"
     networks:
@@ -20,9 +46,19 @@ services:
     hostname: report
     container_name: report
     environment:
-      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_ENVIRONMENT: Docker
     ports:
       - "5002:80"
     networks:
       cashflow:
-        ipv4_address: 172.19.0.202
+        ipv4_address: 172.19.0.204
+
+  cashflow.workservice:
+    hostname: workservice
+    container_name: workservice
+    environment:
+      ASPNETCORE_ENVIRONMENT: Docker
+
+volumes:
+  cashflow-postgres:
+    driver: local

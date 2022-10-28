@@ -12,3 +12,9 @@ services:
     build:
       context: .
       dockerfile: CashFlow.Report/Dockerfile
+
+  cashflow.workservice:
+    image: ${DOCKER_REGISTRY-}cashflowworkservice
+    build:
+      context: .
+      dockerfile: CashFlow.WorkService/Dockerfile
